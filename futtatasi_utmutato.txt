@@ -1,0 +1,64 @@
+Futtatási útmutató – Virtuális IoT Időjárásállomás (Windows)
+
+0) Előkészület
+- A ZIP fájlt csomagold ki egy mappába (pl. Letöltések\virtualis_iot_idojarasallomas_v2).
+- A mappában ezek a fájlok legyenek láthatók:
+  - virtualis_idojarasallomas.py
+  - requirements.txt 
+
+1) Python telepítése (ha még nincs)
+- Telepítsd a Python 3-at a python.org oldalról.
+- Telepítésnél pipáld be: “Add Python to PATH”.
+
+2) Parancssor megnyitása
+- Nyomd meg: Win + R
+- Írd be: cmd
+- Enter
+
+3) Belépés a projekt mappájába
+- Írd be (példa útvonal, a saját gépeden lehet más):
+  cd C:\Users\<xyfelhasználó>\Downloads\virtualis_iot_idojarasallomas_v2
+
+4) Szükséges csomagok telepítése
+Opció A (ajánlott, ha van requirements.txt):
+  python -m pip install -r requirements.txt
+
+Opció B (ha nincs requirements.txt, vagy hibázik):
+  python -m pip install requests
+
+Megjegyzés: Ha a telepítés sikeres, nem kell újra megcsinálni.
+
+5) Futtatás DEMO módban (felhő/ThingSpeak nélkül)
+- DEMO módban a program csak szimulált adatokat generál és kiírja a képernyőre:
+  python virtualis_idojarasallomas.py --csak-demo
+
+6) Futtatás ThingSpeak feltöltéssel (felhő mód)
+6.1) ThingSpeak beállítás (röviden)
+- ThingSpeak-en hozz létre egy Channel-t.
+- Állíts be 3 mezőt (field1, field2, field3), pl.:
+  field1 = Homerseklet
+  field2 = Paratartalom
+  field3 = Legnyomas
+- Másold ki a csatorna “Write API Key”-ét.
+
+6.2) Program indítása API kulccsal
+- Indítsd a programot így:
+  python virtualis_idojarasallomas.py --api-kulcs IDE_ILL_ESZD_BE_A_KULCSOD
+
+Alternatíva (környezeti változóval):
+  set THINGSPEAK_API_KULCS=IDE_ILL_ESZD_BE_A_KULCSOD
+  python virtualis_idojarasallomas.py
+
+7) Gyakori hibák és megoldások
+- “No module named 'requests'”
+  -> Futtesd:
+     python -m pip install requests
+
+- “Nincs megadva API kulcs…”
+  -> DEMO módhoz használd a --csak-demo kapcsolót, vagy add meg az --api-kulcs paramétert / THINGSPEAK_API_KULCS változót.
+
+- A program azonnal kilép
+  -> Parancssorból indítsd (cmd), így látod az üzeneteket.
+
+Készítette: (Szénás Patrik József)
+Dátum: (2025.12.10)
